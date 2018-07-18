@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-15">
     <button class="btn btn-success">new project</button>
   </div>
 </div>
 <hr>
 <div class="row">
   <div class="col-xs-12">
-    <a href="#" class="list-group-item clearfix"  *ngFor="let proj of liveProjects">
+    <a href="#" class="list-group-item clearfix"  *ngFor="let proj of liveProjects" (click)="selectedProject = proj">
       <div class="pull-left">
         <h4 class="list-group-item-heading">{{ proj.name }}</h4>
         <p class="list-group-item-text">{{ proj.GetRecruitmentPercent() }}</p>
@@ -15,9 +15,13 @@
         <img [src]="proj.imagePath" alt="{{ proj.name }}" class="img-responsive" style="max-height: 50px;">
       </span>
     </a>
-    <app-live-project-detail></app-live-project-detail>
   </div>
   <div class="col-xs-12">
-    <app-project-edit></app-project-edit>
+    <app-live-project-detail *ngIf="selectedProject; else noProject" [proj]="selectedProject"></app-live-project-detail>
+    <ng-template #noProject>
+      <p></p>
+    </ng-template>
   </div>
 </div>
+
+

@@ -1,11 +1,7 @@
 <div class="row">
-  <div class="col-xs-12">
-    <app-archive-projects-list></app-archive-projects-list>
-  </div>
-  <div class="col-xs-12">
-    <app-live-projects-list></app-live-projects-list>
-  </div>
-  <div class="col-xs-12">
-    <app-kickedout-projects-list></app-kickedout-projects-list>
+  <div class="col-md-5">
+    <app-archive-projects-list *ngIf= " viewType == 'archive' "></app-archive-projects-list>
+    <app-live-projects-list *ngIf=" viewType === 'live' "></app-live-projects-list>
+    <app-kickedout-projects-list *ngIf=" viewType === 'kickedout' "></app-kickedout-projects-list>
   </div>
 </div>

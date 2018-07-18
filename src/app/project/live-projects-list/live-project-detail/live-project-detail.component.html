@@ -1,3 +1,55 @@
-<p>
-  live-project-detail works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{proj.name}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <img [src]="proj.imagePath" alt="{{proj.name}}" class="img-responsive" style="max-height: 300px;">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <p>{{proj.description}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <p>Link to example: {{proj.linkToExample}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <p>Days left: {{proj.daysLeft}}</p>
+  </div>
+  <div class="col-xs-12">
+    <p>Hours left: {{proj.hoursLeft}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <p>Goal: {{proj.neededMoney}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <p>Collected: {{proj.moneyCollected}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group">
+      <button type="button"
+              class="btn btn-primary dropdown-toggle">
+        manage project <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">edit</a></li>
+        <li><a href="#">save</a></li>
+        <li><a href="#">archive</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

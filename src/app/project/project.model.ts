@@ -1,3 +1,4 @@
+import {s} from "@angular/core/src/render3";
 
 export class Project {
   public name: string;
@@ -7,8 +8,9 @@ export class Project {
   public hoursLeft: number;
   public neededMoney: number;
   public moneyCollected: number;
+  public linkToExample: string;
 
-  constructor(name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,moneyCollected: number){
+  constructor(name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,moneyCollected: number,linkToExample: string){
   this.name = name;
   this.description = description;
   this.imagePath = imagePath;
@@ -16,6 +18,7 @@ export class Project {
   this.hoursLeft = hoursLeft;
   this.neededMoney = neededMoney;
   this.moneyCollected = moneyCollected;
+  this.linkToExample = linkToExample;
   }
   GetRecruitmentPercent(){
     return this.moneyCollected/this.neededMoney*100;
