@@ -9,6 +9,8 @@ export class Project {
   public neededMoney: number;
   public moneyCollected: number;
   public linkToExample: string;
+  public status: string;
+  public owner: string;
 
   constructor(name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,moneyCollected: number,linkToExample: string){
   this.name = name;
@@ -19,6 +21,7 @@ export class Project {
   this.neededMoney = neededMoney;
   this.moneyCollected = moneyCollected;
   this.linkToExample = linkToExample;
+  this.status = 'live'
   }
   GetRecruitmentPercent(){
     return this.moneyCollected/this.neededMoney*100;

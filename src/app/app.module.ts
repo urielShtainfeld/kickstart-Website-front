@@ -11,6 +11,12 @@ import { ArchiveProjectsListComponent } from './project/archive-projects-list/ar
 import { LiveProjectDetailComponent } from './project/live-projects-list/live-project-detail/live-project-detail.component';
 import { ArchiveProjectDetailComponent } from './project/archive-projects-list/archive-project-detail/archive-project-detail.component';
 import { KickedoutProjectDetailComponent } from './project/kickedout-projects-list/kickedout-project-detail/kickedout-project-detail.component';
+import {DropdownDirective} from "./shared/dropdown.directive";
+import {RouterModule, Routes} from "@angular/router";
+
+const appRotes: Routes = [
+
+]
 
 @NgModule({
   declarations: [
@@ -24,9 +30,11 @@ import { KickedoutProjectDetailComponent } from './project/kickedout-projects-li
     LiveProjectDetailComponent,
     ArchiveProjectDetailComponent,
     KickedoutProjectDetailComponent,
+    DropdownDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
