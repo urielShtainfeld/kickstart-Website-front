@@ -1,4 +1,5 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default"
+  routerLinkActive="active">
   <div class="container-fluid">
     <div class="navbar-header">
       <a href="#" class="navbar-brand">Projects</a>
@@ -6,9 +7,9 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#" (click)="onSelect('archive')">archive projects</a></li>
-        <li><a href="#" (click)="onSelect('live')">live projects</a></li>
-        <li><a href="#" (click)="onSelect('kickedout')">kickedout projects</a></li>
+        <li routerLinkActive="active"><a routerLink="/archive">archive projects</a></li>
+        <li routerLinkActive="active"><a routerLink="/live">live projects</a></li>
+        <li routerLinkActive="active"><a routerLink="/kickedout">kickedout projects</a></li>
       </ul>
       <!--<ul class="nav navbar-nav navbar-right">-->
         <!--<li class="dropdown">-->
