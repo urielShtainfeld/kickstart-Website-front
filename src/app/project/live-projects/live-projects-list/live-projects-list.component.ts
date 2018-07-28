@@ -14,6 +14,11 @@ export class LiveProjectsListComponent implements OnInit {
   constructor(private projectService: projectService, private router: Router , private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.projectService.projectsChanged.subscribe(
+      (projects: Project[]) => {
+        this.liveProjects = projects;
+      }
+    )
     this.liveProjects = this.projectService.getProjects();
   }
   onNewProject(){

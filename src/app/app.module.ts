@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -16,6 +17,7 @@ import { EmptyProjectComponent } from './project/empty-project/empty-project.com
 import { LiveProjectItemComponent } from './project/live-projects/live-projects-list/live-project-item/live-project-item.component';
 import { LiveProjectsComponent } from './project/live-projects/live-projects.component';
 import { LiveProjectEditComponent } from './project/live-projects/live-project-edit/live-project-edit.component';
+import { DonateProjectComponent } from './project/live-projects/donate-project/donate-project.component';
 
 
 
@@ -34,10 +36,13 @@ import { LiveProjectEditComponent } from './project/live-projects/live-project-e
     EmptyProjectComponent,
     LiveProjectItemComponent,
     LiveProjectsComponent,
-    LiveProjectEditComponent
+    LiveProjectEditComponent,
+    DonateProjectComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],
