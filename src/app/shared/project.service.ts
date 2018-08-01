@@ -1,7 +1,10 @@
+import {Injectable} from "@angular/core";
 import {Project} from "../project/project.model";
 import {Donate} from "../project/donate.model";
 import {Subject} from "rxjs/Subject";
 
+
+@Injectable()
 export class projectService{
   projectsChanged = new Subject<Project[]>();
   kickedoutProjectsChanged = new Subject<Project[]>();
@@ -15,6 +18,11 @@ export class projectService{
 
   private archiveProjects: Project[] =[];
   private kickedoutProjects: Project[] = [];
+
+  setProjects(projects: Project[]){
+    this.liveProjects = projects;
+    this.projectsChanged.next(this.liveProjects.slice());
+  }
 
   getProjects(){
     return this.liveProjects.slice();

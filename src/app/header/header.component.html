@@ -11,15 +11,21 @@
         <li routerLinkActive="active"><a routerLink="/live">live projects</a></li>
         <li routerLinkActive="active"><a routerLink="/kickedout">kickedout projects</a></li>
       </ul>
-      <!--<ul class="nav navbar-nav navbar-right">-->
-        <!--<li class="dropdown">-->
-          <!--<a href = "#" class = "dropdown-toggle" role="button">Manage <span class="caret"></span> </a>-->
-          <!--<ul class="dropdown-menu">-->
-            <!--<li><a href="#"></a>edit </li>-->
-            <!--<li><a href="#"></a>save </li>-->
-          <!--</ul>-->
-        <!--</li>-->
-      <!--</ul>-->
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a routerLink="/signin"> Sign in</a></li>
+        <li><a routerLink="/signup"> Register</a></li>
+        <li class="dropdown" appDropdown>
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
+            <li><a style="cursor: pointer;" (click)="onGetData()">Fetch Data</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a>Welcome {{connectedUser}} </a> </li>
+      </ul>
     </div>
   </div>
 </nav>

@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {projectService} from "../../../shared/project.service";
 import {Project} from "../../project.model";
+import {userService} from "../../../shared/user.service";
 
 @Component({
   selector: 'app-live-project-edit',
@@ -15,7 +16,7 @@ export class LiveProjectEditComponent implements OnInit {
   projectForm: FormGroup;
 
   constructor(private route: ActivatedRoute , private projectService: projectService
-              , private router: Router) { }
+              , private router: Router,private userService: userService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -27,7 +28,6 @@ export class LiveProjectEditComponent implements OnInit {
     );
   }
 
-
   onSubmit(){
     const newProject = new Project(this.projectForm.value['name'],
       this.projectForm.value['description'],
@@ -36,7 +36,7 @@ export class LiveProjectEditComponent implements OnInit {
       this.projectForm.value['hoursLeft'],
       this.projectForm.value['neededMoney'],
       this.projectForm.value['linkToExample'],
-      'uriel');
+      this.userService.getUser().username);
     if (this.editMode){
       this.projectService.updateProject(this.id,newProject);
     } else {
@@ -79,14 +79,5 @@ export class LiveProjectEditComponent implements OnInit {
   onCancel(){
     this.router.navigate(['../'],{relativeTo: this.route});
   }
-
 }
 
-// constructor(name: string,
-//   description: string,
-//   imagePath: string,
-//   daysLeft: number,
-//   hoursLeft: number,
-//   neededMoney: number,
-//   linkToExample: string,
-//   owner: string)

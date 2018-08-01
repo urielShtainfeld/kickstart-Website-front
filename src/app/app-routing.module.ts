@@ -6,6 +6,8 @@ import {EmptyProjectComponent} from "./project/empty-project/empty-project.compo
 import {LiveProjectDetailComponent} from "./project/live-projects/live-project-detail/live-project-detail.component";
 import {LiveProjectsComponent} from "./project/live-projects/live-projects.component";
 import {LiveProjectEditComponent} from "./project/live-projects/live-project-edit/live-project-edit.component";
+import {SignupComponent} from "./auth/signup/signup.component";
+import {SigninComponent} from "./auth/signin/signin.component";
 
 
 const appRoutes: Routes = [
@@ -18,7 +20,9 @@ const appRoutes: Routes = [
 
     ]},
   {path: 'archive' , component: ArchiveProjectsListComponent},
-  {path: 'kickedout' , component: KickedoutProjectsListComponent}
+  {path: 'kickedout' , component: KickedoutProjectsListComponent},
+  {path: 'signup' , component:SignupComponent},
+  {path: 'signin' , component:SigninComponent}
 ]
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
