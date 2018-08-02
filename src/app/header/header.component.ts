@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit{
   constructor(private serverService: ServerService,private userService: userService){}
   ngOnInit(){
     this.getConnectetUserName();
+    this.userService.userChanged.subscribe((userName: string) => {
+      this.connectedUser = userName;
+    });
   }
   onSaveData(){
     this.serverService.storeProject();
@@ -22,10 +25,13 @@ export class HeaderComponent implements OnInit{
     this.serverService.getProjects();
   }
   getConnectetUserName(){
-    if(this.userService.getUser()){
-      this.connectedUser = this.userService.getUser().username;
+    if(this.userService.getUserName()){
+      this.connectedUser = this.userService.getUserName();
     }else {
       this.connectedUser = 'guest'
     }
+  }
+  signOut(){
+    this.userService.signOutUser();
   }
 }

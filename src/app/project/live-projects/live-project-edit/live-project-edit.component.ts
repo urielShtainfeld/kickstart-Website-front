@@ -36,7 +36,7 @@ export class LiveProjectEditComponent implements OnInit {
       this.projectForm.value['hoursLeft'],
       this.projectForm.value['neededMoney'],
       this.projectForm.value['linkToExample'],
-      this.userService.getUser().username);
+      this.userService.getUserName());
     if (this.editMode){
       this.projectService.updateProject(this.id,newProject);
     } else {

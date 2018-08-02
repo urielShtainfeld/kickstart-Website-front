@@ -23,6 +23,7 @@ import {ServerService} from "./shared/server.service";
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import {userService} from "./shared/user.service";
+import {LocalStorageService} from "./shared/local-storage.service";
 
 
 
@@ -52,7 +53,7 @@ import {userService} from "./shared/user.service";
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [projectService,ServerService,userService],
+  providers: [projectService,ServerService,userService,LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

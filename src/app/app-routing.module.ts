@@ -8,6 +8,7 @@ import {LiveProjectsComponent} from "./project/live-projects/live-projects.compo
 import {LiveProjectEditComponent} from "./project/live-projects/live-project-edit/live-project-edit.component";
 import {SignupComponent} from "./auth/signup/signup.component";
 import {SigninComponent} from "./auth/signin/signin.component";
+import {DonateProjectComponent} from "./project/live-projects/donate-project/donate-project.component";
 
 
 const appRoutes: Routes = [
@@ -16,8 +17,8 @@ const appRoutes: Routes = [
       {path: '',component: EmptyProjectComponent},
       {path: 'new', component: LiveProjectEditComponent},
       {path: ':id',component: LiveProjectDetailComponent},
-      {path: ':id/edit', component: LiveProjectEditComponent}
-
+      {path: ':id/edit', component: LiveProjectEditComponent},
+      {path: ':id/donate', component: DonateProjectComponent}
     ]},
   {path: 'archive' , component: ArchiveProjectsListComponent},
   {path: 'kickedout' , component: KickedoutProjectsListComponent},

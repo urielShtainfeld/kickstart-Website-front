@@ -25,6 +25,9 @@ export class LiveProjectDetailComponent implements OnInit {
   onClickEdit(){
     this.router.navigate(['edit'],{relativeTo: this.route});
   }
+  onDonate(){
+    this.router.navigate(['donate'],{relativeTo: this.route});
+  }
   onDelete(){
     this.projectsService.archiveProject(this.id);
     this.router.navigate(['/live']);
