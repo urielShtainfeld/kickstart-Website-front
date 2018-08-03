@@ -4,6 +4,7 @@ import {projectService} from "./project.service";
 import {userService} from "./user.service";
 import {User} from "../auth/user.model";
 import {Observable} from "rxjs/Observable";
+import {Project} from "../project/project.model";
 
 const backEndUrl = 'http://localhost:3000/';
 
@@ -13,19 +14,37 @@ export class ServerService {
   private result:string;
 
   storeProject(){
-    this.http.post(backEndUrl+'project',this.projectService.getProjects())
-      .subscribe(
-        (response: any) => {
+    this.projectService.getProjects().forEach( (proj) => {
+      this.http.post(backEndUrl+'project',proj)
+        .subscribe(
+          (response: any) => {
             console.log(response);
-        }
-      );
+          }
+        );
+    })
+
   }
   getProjects(){
     this.http.get(backEndUrl+'project')
       .subscribe(
         (response: any) => {
-          const projects = response.json();
-          this.projectService.setProjects(projects);
+          const projects =[];
+          response.json().forEach((proj) => {
+            projects.push(proj)
+          })
+          let newProjects = [];
+          projects.forEach((project) =>{
+            newProjects.push(
+               new Project(project.name,
+                project.description,
+                project.imagePath,
+                project.daysLeft,
+                project.hoursLeft,
+                project.neededMoney,
+                project.linkToExample,
+                project.owner));
+          });
+          this.projectService.setProjects(newProjects);
         }
       );
   }

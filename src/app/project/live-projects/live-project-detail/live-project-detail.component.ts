@@ -2,6 +2,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 import {Project} from "../../project.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {projectService} from "../../../shared/project.service";
+import {userService} from "../../../shared/user.service";
 
 @Component({
   selector: 'app-live-project-detail',
@@ -11,15 +12,31 @@ import {projectService} from "../../../shared/project.service";
 export class LiveProjectDetailComponent implements OnInit {
   proj: Project;
   id: number;
-  constructor(private projectsService: projectService,private route: ActivatedRoute, private router: Router) { }
+  canEdit: boolean = false;
+  isUser: boolean = false;
+  constructor(private projectsService: projectService,private route: ActivatedRoute, private router: Router, private userService: userService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
         this.proj = this.projectsService.getProjectById(this.id);
+        if (this.userService.userAutenticated ) {
+          if (this.userService.getUserType().toUpperCase() === 'ADMIN' ||
+            (this.userService.getUserType().toUpperCase() === 'CREATOR' && this.proj.owner === this.userService.getUserName())) {
+            this.canEdit = true;
+            this.isUser = true;
+          } else {
+            this.canEdit = false;
+          }
+        }
+        else{
+          this.isUser = false;
+        }
       }
     );
+
+
   }
 
   onClickEdit(){

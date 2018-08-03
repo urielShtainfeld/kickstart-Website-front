@@ -7,12 +7,14 @@ import {LocalStorageService} from "./local-storage.service";
 @Injectable()
 export class userService{
   userChanged = new Subject<string>();
+  userAutenticated: boolean = false;
   constructor(private localStorage: LocalStorageService){
 
   }
   setUser(user: User){
     this.localStorage.set('username',user.username);
     this.localStorage.set('usertype',user.usertype);
+    this.userAutenticated = true;
     this.userChanged.next(user.username);
   }
   getUserName(){
@@ -24,6 +26,8 @@ export class userService{
   signOutUser(){
     this.localStorage.remove('username');
     this.localStorage.remove('usertype');
+    this.userAutenticated = false;
     this.userChanged.next('guest');
+
   }
 }

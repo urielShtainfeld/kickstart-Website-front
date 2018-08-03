@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-15">
-    <button class="btn btn-success"(click)="onNewProject()">new project</button>
+    <button class="btn btn-success"(click)="onNewProject()" *ngIf="canCreate">new project</button>
   </div>
 </div>
 <hr>

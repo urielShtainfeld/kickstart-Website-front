@@ -42,7 +42,7 @@
       <div class="btn-group"
       appDropdown>
         <button type="button"
-                class="btn btn-primary dropdown-toggle">
+                class="btn btn-primary dropdown-toggle" *ngIf="canEdit">
           manage project <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -55,7 +55,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <button class="btn btn-success"(click)="onDonate()">Donate</button>
+      <button class="btn btn-success"(click)="onDonate()" *ngIf="isUser">Donate</button>
     </div>
   </div>
 </a>
