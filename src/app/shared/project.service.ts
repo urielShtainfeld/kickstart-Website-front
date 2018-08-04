@@ -6,6 +6,7 @@ import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class projectService{
+
   projectsChanged = new Subject<Project[]>();
   kickedoutProjectsChanged = new Subject<Project[]>();
   archiveProjectsChanged = new Subject<Project[]>();
@@ -28,6 +29,13 @@ export class projectService{
     return this.liveProjects.slice();
   }
 
+  getKickedoutProjects(){
+    return this.kickedoutProjects.slice();
+  }
+
+  getArchiveProjects(){
+    return this.archiveProjects.slice();
+  }
   getProjectById(id: number){
     return this.liveProjects[id];
   }
@@ -47,9 +55,11 @@ export class projectService{
     this.projectsChanged.next(this.liveProjects.slice());
   }
   archiveProject(index: number){
+    this.liveProjects[index].status = 'Archive';
     this.archiveProjects.push(this.liveProjects[index]);
     this.liveProjects.splice(index,1);
     this.projectsChanged.next(this.liveProjects.slice());
     this.archiveProjectsChanged.next(this.archiveProjects.slice());
   }
+
 }

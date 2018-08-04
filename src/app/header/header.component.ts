@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServerService} from "../shared/server.service";
 import {userService} from  "../shared/user.service";
+import {projectService} from "../shared/project.service";
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,26 @@ import {userService} from  "../shared/user.service";
 })
 export class HeaderComponent implements OnInit{
   connectedUser: string;
+  noOfLivePorojects: number = 0;
+  noOfKickedOut: number = 0;
 
-  constructor(private serverService: ServerService,private userService: userService){}
+  constructor(private serverService: ServerService,private userService: userService , private projectService: projectService){}
   ngOnInit(){
     this.getConnectetUserName();
     this.userService.userChanged.subscribe((userName: string) => {
       this.connectedUser = userName;
     });
+
+    this.noOfLivePorojects = this.projectService.getProjects().length;
+    this.noOfKickedOut = this.projectService.getKickedoutProjects().length;
+
+    this.projectService.projectsChanged.subscribe(() =>{
+      this.noOfLivePorojects = this.projectService.getProjects().length;
+    })
+    this.projectService.kickedoutProjectsChanged.subscribe(() =>{
+      this.noOfKickedOut = this.projectService.getKickedoutProjects().length;
+    })
+
   }
   onSaveData(){
     this.serverService.storeProject();

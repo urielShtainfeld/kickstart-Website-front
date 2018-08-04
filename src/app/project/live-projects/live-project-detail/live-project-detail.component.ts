@@ -3,6 +3,7 @@ import {Project} from "../../project.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {projectService} from "../../../shared/project.service";
 import {userService} from "../../../shared/user.service";
+import {ServerService} from "../../../shared/server.service";
 
 @Component({
   selector: 'app-live-project-detail',
@@ -14,7 +15,8 @@ export class LiveProjectDetailComponent implements OnInit {
   id: number;
   canEdit: boolean = false;
   isUser: boolean = false;
-  constructor(private projectsService: projectService,private route: ActivatedRoute, private router: Router, private userService: userService) { }
+  constructor(private projectsService: projectService,private route: ActivatedRoute, private router: Router
+              , private userService: userService, private serverService: ServerService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -47,6 +49,7 @@ export class LiveProjectDetailComponent implements OnInit {
   }
   onDelete(){
     this.projectsService.archiveProject(this.id);
+    this.serverService.updatePoject( this.projectsService.getArchiveProjects()[ this.projectsService.getArchiveProjects().length-1]);
     this.router.navigate(['/live']);
   }
 }

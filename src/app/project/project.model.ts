@@ -1,6 +1,8 @@
 import {Donate} from "./donate.model";
+import { Guid } from "guid-typescript";
 
 export class Project {
+  public uniqueId: string;
   public name: string;
   public description: string;
   public imagePath: string;
@@ -13,8 +15,13 @@ export class Project {
   public owner: string;
   public donations: Donate[] = [];
 
-  constructor(name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,
+  constructor(uniqueId: string,name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,
               linkToExample: string,owner: string){
+  if (uniqueId != undefined){
+    this.uniqueId = uniqueId;
+  } else {
+    this.uniqueId = Guid.create().toString();
+  }
   this.name = name;
   this.description = description;
   this.imagePath = imagePath;
@@ -33,4 +40,14 @@ export class Project {
     this.moneyCollected += donation.amount;
     this.donations.push(donation);
   }
+  checkIfKickedOut(){
+    if(this.GetRecruitmentPercent() >= 100 ){
+      this.status = 'kickedout';
+      return true;
+    } else {
+      this.status = 'Archive';
+      return false;
+    }
+  }
+
 }

@@ -3,7 +3,6 @@ import {Http} from "@angular/http";
 import {projectService} from "./project.service";
 import {userService} from "./user.service";
 import {User} from "../auth/user.model";
-import {Observable} from "rxjs/Observable";
 import {Project} from "../project/project.model";
 
 const backEndUrl = 'http://localhost:3000/';
@@ -24,6 +23,23 @@ export class ServerService {
     })
 
   }
+  updatePoject(project: Project){
+    this.http.post(backEndUrl+'updateproject',project)
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+        }
+      );
+  }
+
+  storeOneProject(project: Project){
+      this.http.post(backEndUrl+'project',project)
+        .subscribe(
+          (response: any) => {
+            console.log(response);
+          }
+        );
+  }
   getProjects(){
     this.http.get(backEndUrl+'project')
       .subscribe(
@@ -35,7 +51,7 @@ export class ServerService {
           let newProjects = [];
           projects.forEach((project) =>{
             newProjects.push(
-               new Project(project.name,
+               new Project(project.uniqueId,project.name,
                 project.description,
                 project.imagePath,
                 project.daysLeft,
@@ -69,9 +85,7 @@ export class ServerService {
           return usertype;
         },(error:any) => {
           console.log(error.json());
-
           throw error;
         });
-
   }
 }

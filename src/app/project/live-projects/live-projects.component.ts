@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {projectService} from "../../shared/project.service";
 
 
 @Component({
@@ -7,13 +6,10 @@ import {projectService} from "../../shared/project.service";
   templateUrl: './live-projects.component.html',
   styleUrls: ['./live-projects.component.css']
 })
-export class LiveProjectsComponent implements OnInit {
+export class LiveProjectsComponent {
 
 
-  constructor(private projectService: projectService) { }
+  constructor() { }
 
-  ngOnInit() {
-
-  }
 
 }

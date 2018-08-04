@@ -1,0 +1,4 @@
+1. make sure you have kickstart-Website-Back too
+2. run this command at "run" of windows: chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+3. run "node server.js" in cmd in the parent directory of "kickstart-Website-Back" (Needed Port 3000)
+4. run "ng serve" in cmd in the parent directory of "kickstart-Website-front" (Needed Port 4200)
