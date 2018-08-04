@@ -12,17 +12,17 @@ export class ServerService {
   constructor(private http: Http,private projectService: projectService,private userService: userService){}
   private result:string;
 
-  storeProject(){
-    this.projectService.getProjects().forEach( (proj) => {
-      this.http.post(backEndUrl+'project',proj)
-        .subscribe(
-          (response: any) => {
-            console.log(response);
-          }
-        );
-    })
-
-  }
+  // storeProject(){
+  //   this.projectService.getProjects().forEach( (proj) => {
+  //     this.http.post(backEndUrl+'project',proj)
+  //       .subscribe(
+  //         (response: any) => {
+  //           console.log(response);
+  //         }
+  //       );
+  //   })
+  //
+  // }
   updatePoject(project: Project){
     this.http.post(backEndUrl+'updateproject',project)
       .subscribe(
@@ -48,19 +48,60 @@ export class ServerService {
           response.json().forEach((proj) => {
             projects.push(proj)
           })
-          let newProjects = [];
+          let newliveProjects = [];
+          let newArvhiceProjects = [];
+          let newKickedoutProjects = [];
           projects.forEach((project) =>{
-            newProjects.push(
-               new Project(project.uniqueId,project.name,
-                project.description,
-                project.imagePath,
-                project.daysLeft,
-                project.hoursLeft,
-                project.neededMoney,
-                project.linkToExample,
-                project.owner));
+            switch (project.status.toUpperCase()) {
+              case 'LIVE':{
+                newliveProjects.push(
+                  new Project(project.uniqueId,project.name,
+                    project.description,
+                    project.imagePath,
+                    project.daysLeft,
+                    project.hoursLeft,
+                    project.neededMoney,
+                    project.linkToExample,
+                    project.owner,
+                    project.donations,
+                    project.moneyCollected));
+                break;
+              }
+              case 'KICKEDOUT':{
+                newKickedoutProjects.push(
+                  new Project(project.uniqueId,project.name,
+                    project.description,
+                    project.imagePath,
+                    project.daysLeft,
+                    project.hoursLeft,
+                    project.neededMoney,
+                    project.linkToExample,
+                    project.owner,
+                    project.donations,
+                    project.moneyCollected));
+                break;
+              }
+              case 'ARCHIVE':{
+                newArvhiceProjects.push(
+                  new Project(project.uniqueId,project.name,
+                    project.description,
+                    project.imagePath,
+                    project.daysLeft,
+                    project.hoursLeft,
+                    project.neededMoney,
+                    project.linkToExample,
+                    project.owner,
+                    project.donations,
+                    project.moneyCollected));
+                break;
+              }
+
+            }
+
           });
-          this.projectService.setProjects(newProjects);
+          this.projectService.setProjects(newliveProjects);
+          this.projectService.setKickedoutProjects(newKickedoutProjects);
+          this.projectService.setArchiveProjects(newArvhiceProjects);
         }
       );
   }
@@ -72,12 +113,11 @@ export class ServerService {
         });
   }
   signInUser(username: string,password: string){
-    this.http.post(backEndUrl+'signIn',new User(username,password,'')) //TODO: fix body for user and pass
+    this.http.post(backEndUrl+'signIn',new User(username,password,''))
       .subscribe(
         (response: any) => {
           console.log('user sign in successfully');
           let usertype;
-     //     let jsonResponse = response.json();
           if (response.json()) {
             usertype = response.json();
           }

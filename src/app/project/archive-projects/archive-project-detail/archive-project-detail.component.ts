@@ -18,7 +18,7 @@ export class ArchiveProjectDetailComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        this.proj = this.projectsService.getProjectById(this.id);
+        this.proj = this.projectsService.getArchiveProjects()[this.id];
       }
     );
   }

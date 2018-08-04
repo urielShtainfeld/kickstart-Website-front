@@ -16,7 +16,7 @@ export class Project {
   public donations: Donate[] = [];
 
   constructor(uniqueId: string,name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,
-              linkToExample: string,owner: string){
+              linkToExample: string,owner: string,donations: Donate[], moneyCollected: number ){
   if (uniqueId != undefined){
     this.uniqueId = uniqueId;
   } else {
@@ -28,10 +28,11 @@ export class Project {
   this.daysLeft = daysLeft;
   this.hoursLeft = hoursLeft;
   this.neededMoney = neededMoney;
-  this.moneyCollected = 0;
+  this.moneyCollected = moneyCollected;
   this.linkToExample = linkToExample;
   this.status = 'live';
   this.owner = owner;
+  this.donations = donations;
   }
   GetRecruitmentPercent(){
     return this.moneyCollected/this.neededMoney*100;

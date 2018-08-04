@@ -11,9 +11,10 @@ import {LocalStorageService} from "./shared/local-storage.service";
   providers: [projectService,userService,ServerService,LocalStorageService]
 })
 export class AppComponent{
-  constructor(private userService: userService){
+  constructor(private userService: userService,private serverService: ServerService){
     if (this.userService.getUserName()){
       this.userService.userAutenticated = true;
     }
+    this.serverService.getProjects();
   }
 }

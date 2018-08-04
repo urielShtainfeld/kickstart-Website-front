@@ -25,6 +25,16 @@ export class projectService{
     this.projectsChanged.next(this.liveProjects.slice());
   }
 
+  setKickedoutProjects(projects: Project[]){
+    this.kickedoutProjects = projects;
+    this.kickedoutProjectsChanged.next(this.kickedoutProjects.slice());
+  }
+
+  setArchiveProjects(projects: Project[]){
+    this.archiveProjects = projects;
+    this.archiveProjectsChanged.next(this.archiveProjects.slice());
+  }
+
   getProjects(){
     return this.liveProjects.slice();
   }
@@ -43,6 +53,7 @@ export class projectService{
   addDonation(donation: Donate,id: number){
     this.liveProjects[id].addDonation(donation);
     this.liveProjects[id].moneyCollected += donation.amount;
+    this.projectsChanged.next(this.liveProjects.slice());
   }
 
   addProject(newProject: Project){

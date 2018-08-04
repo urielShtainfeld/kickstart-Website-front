@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Project} from "../../project.model";
 import {projectService} from "../../../shared/project.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {userService} from "../../../shared/user.service";
-import {ServerService} from "../../../shared/server.service";
 
 @Component({
   selector: 'app-kickedout-project-detail',
@@ -19,7 +17,7 @@ export class KickedoutProjectDetailComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        this.proj = this.projectsService.getProjectById(this.id);
+        this.proj = this.projectsService.getKickedoutProjects()[this.id];
       }
     );
   }

@@ -31,13 +31,13 @@ export class HeaderComponent implements OnInit{
     })
 
   }
-  onSaveData(){
-    this.serverService.storeProject();
-
-  }
-  onGetData(){
-    this.serverService.getProjects();
-  }
+  // onSaveData(){
+  //   this.serverService.storeProject();
+  //
+  // }
+  // onGetData(){
+  //   this.serverService.getProjects();
+  // }
   getConnectetUserName(){
     if(this.userService.getUserName()){
       this.connectedUser = this.userService.getUserName();

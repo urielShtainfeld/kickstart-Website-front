@@ -32,13 +32,17 @@ export class LiveProjectEditComponent implements OnInit {
   onSubmit(){
     let owner = '';
     let uniqueId;
+    let moneyCollected = 0;
+    let donations = [];
     if (this.editMode){
       owner = this.projectService.getProjectById(this.id).owner;
       uniqueId = this.projectService.getProjectById(this.id).uniqueId;
+      moneyCollected = this.projectService.getProjectById(this.id).moneyCollected;
+      donations = this.projectService.getProjectById(this.id).donations;
     }else {
       uniqueId = undefined;
       owner =this.userService.getUserName();
-
+      moneyCollected = 0;
     }
 
     const newProject = new Project(uniqueId,
@@ -49,7 +53,9 @@ export class LiveProjectEditComponent implements OnInit {
       this.projectForm.value['hoursLeft'],
       this.projectForm.value['neededMoney'],
       this.projectForm.value['linkToExample'],
-      owner);
+      owner,
+      donations,
+      moneyCollected);
     if (this.editMode){
       this.projectService.updateProject(this.id,newProject);
       this.serverService.updatePoject(newProject);

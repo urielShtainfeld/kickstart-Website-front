@@ -16,7 +16,7 @@ export class DonateProjectComponent implements OnInit {
   donateForm: FormGroup;
   id: number;
   constructor(private route: ActivatedRoute , private projectService: projectService
-    , private router: Router,private userService: userService) { }
+    , private router: Router,private userService: userService, private serverService: ServerService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -42,6 +42,7 @@ export class DonateProjectComponent implements OnInit {
 
   onDonate(){
     this.projectService.addDonation(new Donate(this.donateForm.value['name'],this.donateForm.value['amount']),this.id);
+    this.serverService.updatePoject(this.projectService.getProjectById(this.id));
     this.onCancel();
   }
 }
