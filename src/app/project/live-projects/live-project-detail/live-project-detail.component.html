@@ -44,7 +44,7 @@
     <div class="column"  >
       <div class="col-xs-12">
         <p class="list-group-item clearfix"
-        *ngFor="let donation of proj.donations;let i = index"> {{i+1}}. {{donation.name }}  {{donation.amount}}</p>
+        *ngFor="let donation of proj.donations;let i = index "> {{i+1}}. {{donation.name }}  {{donation.amount}}</p>
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <button class="btn btn-success"(click)="onDonate()" *ngIf="isUser">Donate</button>
+      <button style="cursor:pointer;" class="btn btn-success"(click)="onDonate()" *ngIf="isUser">Donate</button>
     </div>
   </div>
 </a>

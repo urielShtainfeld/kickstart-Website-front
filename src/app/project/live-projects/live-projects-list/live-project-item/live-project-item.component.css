@@ -3,6 +3,7 @@ img {
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
   width: 150px; /* Set a small width */
+  height: 150px;
 }
 
 /* Add a hover effect (blue shadow) */
