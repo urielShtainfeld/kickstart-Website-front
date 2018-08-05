@@ -1,8 +1,8 @@
-<nav class="navbar navbar-default"
-  routerLinkActive="active">
+<nav class="navbar navbar-default header"
+     routerLinkActive="active">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a href="#" class="navbar-brand">Projects</a>
+      <a href="/" class="navbar-brand" (click)="OnPressHome()">Home</a>
     </div>
 
     <div class="collapse navbar-collapse">
@@ -15,24 +15,17 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a routerLink="/signin"> Sign in</a></li>
         <li><a routerLink="/signup"> Register</a></li>
-        <li><a (click)="signOut()" style="cursor:pointer; font-style: italic;" > sign out </a></li>
-        <!--<li class="dropdown" appDropdown>-->
-          <!--<a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>-->
-          <!--<ul class="dropdown-menu">-->
-            <!--<li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>-->
-            <!--<li><a style="cursor: pointer;" (click)="onGetData()">Fetch Data</a></li>-->
-          <!--</ul>-->
-        <!--</li>-->
+        <li><a (click)="signOut()" style="cursor:pointer; font-style: italic;"> sign out </a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a>Welcome {{connectedUser}} </a> </li>
+        <li><a>Welcome {{connectedUser}} </a></li>
       </ul>
     </div>
   </div>
 </nav>
-<div class="row text-center" >
+<div class="row text-center">
   <h3>
     Number of Live projects: <a style="color: blue">{{noOfLivePorojects}}</a> Number of Kickedout projects: <a
-    style="color: aqua">{{noOfKickedOut}}</a>
+    style="color: #1fff00">{{noOfKickedOut}}</a>
   </h3>
 </div>

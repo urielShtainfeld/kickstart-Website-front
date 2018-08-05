@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from "../../project.model";
 import {projectService} from "../../../shared/project.service";
 
@@ -10,7 +10,8 @@ import {projectService} from "../../../shared/project.service";
 export class ArchiveProjectListComponent implements OnInit {
   archiveProjects: Project[] = [];
 
-  constructor(private projectService: projectService){}
+  constructor(private projectService: projectService) {
+  }
 
   ngOnInit() {
     this.projectService.archiveProjectsChanged.subscribe(

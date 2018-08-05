@@ -11,7 +11,8 @@ export class ArchiveProjectItemComponent implements OnInit {
   @Input() proj: Project;
   @Input() index: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

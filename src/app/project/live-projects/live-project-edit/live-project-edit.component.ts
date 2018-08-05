@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {projectService} from "../../../shared/project.service";
@@ -16,8 +16,9 @@ export class LiveProjectEditComponent implements OnInit {
   editMode = false;
   projectForm: FormGroup;
 
-  constructor(private route: ActivatedRoute , private projectService: projectService
-              , private router: Router,private userService: userService, private  serverService: ServerService) { }
+  constructor(private route: ActivatedRoute, private projectService: projectService
+    , private router: Router, private userService: userService, private  serverService: ServerService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -29,20 +30,23 @@ export class LiveProjectEditComponent implements OnInit {
     );
   }
 
-  onSubmit(){
+  onSubmit() {
     let owner = '';
     let uniqueId;
     let moneyCollected = 0;
     let donations = [];
-    if (this.editMode){
+    let endDate = new Date();
+    if (this.editMode) {
       owner = this.projectService.getProjectById(this.id).owner;
       uniqueId = this.projectService.getProjectById(this.id).uniqueId;
       moneyCollected = this.projectService.getProjectById(this.id).moneyCollected;
       donations = this.projectService.getProjectById(this.id).donations;
-    }else {
+      endDate = this.projectService.getProjectById(this.id).endDate;
+    } else {
       uniqueId = undefined;
-      owner =this.userService.getUserName();
+      owner = this.userService.getUserName();
       moneyCollected = 0;
+      endDate = undefined;
     }
 
     const newProject = new Project(uniqueId,
@@ -55,9 +59,10 @@ export class LiveProjectEditComponent implements OnInit {
       this.projectForm.value['linkToExample'],
       owner,
       donations,
-      moneyCollected);
-    if (this.editMode){
-      this.projectService.updateProject(this.id,newProject);
+      moneyCollected,
+      endDate);
+    if (this.editMode) {
+      this.projectService.updateProject(this.id, newProject);
       this.serverService.updatePoject(newProject);
     } else {
       this.projectService.addProject(newProject);
@@ -67,7 +72,7 @@ export class LiveProjectEditComponent implements OnInit {
     this.onCancel();
   }
 
-  private initForm(){
+  private initForm() {
     let name = '';
     let description = '';
     let imagePath = '';
@@ -76,7 +81,7 @@ export class LiveProjectEditComponent implements OnInit {
     let neededMoney = '';
     let linkToExample = '';
 
-    if (this.editMode){
+    if (this.editMode) {
       const project = this.projectService.getProjectById(this.id);
       name = project.name;
       description = project.description;
@@ -88,18 +93,18 @@ export class LiveProjectEditComponent implements OnInit {
 
     }
     this.projectForm = new FormGroup({
-      'name': new FormControl(name,Validators.required),
-      'description': new FormControl(description,Validators.required),
+      'name': new FormControl(name, Validators.required),
+      'description': new FormControl(description, Validators.required),
       'imagePath': new FormControl(imagePath),
       'daysLeft': new FormControl(daysLeft),
-      'hoursLeft': new FormControl(hoursLeft,Validators.required),
-      'neededMoney': new FormControl(neededMoney,Validators.required),
+      'hoursLeft': new FormControl(hoursLeft, Validators.required),
+      'neededMoney': new FormControl(neededMoney, Validators.required),
       'linkToExample': new FormControl(linkToExample)
     })
   }
 
-  onCancel(){
-    this.router.navigate(['../'],{relativeTo: this.route});
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }
 

@@ -4,25 +4,18 @@ import {projectService} from "./project.service";
 import {userService} from "./user.service";
 import {User} from "../auth/user.model";
 import {Project} from "../project/project.model";
+import {Donate} from "../project/donate.model";
+import { interval } from 'rxjs';
 
 const backEndUrl = 'http://localhost:3000/';
 
 @Injectable()
 export class ServerService {
-  constructor(private http: Http,private projectService: projectService,private userService: userService){}
   private result:string;
+  private secondInterval$ = interval(1000);
+  public loadingFinished: boolean =false;
+  constructor(private http: Http,private projectService: projectService,private userService: userService){}
 
-  // storeProject(){
-  //   this.projectService.getProjects().forEach( (proj) => {
-  //     this.http.post(backEndUrl+'project',proj)
-  //       .subscribe(
-  //         (response: any) => {
-  //           console.log(response);
-  //         }
-  //       );
-  //   })
-  //
-  // }
   updatePoject(project: Project){
     this.http.post(backEndUrl+'updateproject',project)
       .subscribe(
@@ -52,8 +45,33 @@ export class ServerService {
           let newArvhiceProjects = [];
           let newKickedoutProjects = [];
           projects.forEach((project) =>{
+            let newDonations = [];
+            project.donations.forEach((donation) =>{
+              newDonations.push(new Donate(donation.name,+donation.amount))
+            });
+
             switch (project.status.toUpperCase()) {
               case 'LIVE':{
+                if(new Date(project.endDate).getTime() - new Date().getTime() < 0){
+                  let proj = new Project(project.uniqueId,project.name,
+                    project.description,
+                    project.imagePath,
+                    project.daysLeft,
+                    project.hoursLeft,
+                    project.neededMoney,
+                    project.linkToExample,
+                    project.owner,
+                    newDonations,
+                    project.moneyCollected,
+                    new Date(project.endDate));
+                  if (proj.checkIfKickedOut()){
+                    newKickedoutProjects.push(proj);
+                  }else {
+                    newArvhiceProjects.push(proj);
+                  }
+                  this.updatePoject(proj);
+                  break;
+                }
                 newliveProjects.push(
                   new Project(project.uniqueId,project.name,
                     project.description,
@@ -63,8 +81,9 @@ export class ServerService {
                     project.neededMoney,
                     project.linkToExample,
                     project.owner,
-                    project.donations,
-                    project.moneyCollected));
+                    newDonations,
+                    project.moneyCollected,
+                    new Date(project.endDate)));
                 break;
               }
               case 'KICKEDOUT':{
@@ -77,8 +96,9 @@ export class ServerService {
                     project.neededMoney,
                     project.linkToExample,
                     project.owner,
-                    project.donations,
-                    project.moneyCollected));
+                    newDonations,
+                    project.moneyCollected,
+                    new Date(project.endDate)));
                 break;
               }
               case 'ARCHIVE':{
@@ -91,8 +111,9 @@ export class ServerService {
                     project.neededMoney,
                     project.linkToExample,
                     project.owner,
-                    project.donations,
-                    project.moneyCollected));
+                    newDonations,
+                    project.moneyCollected,
+                    new Date(project.endDate)));
                 break;
               }
 

@@ -2,10 +2,10 @@
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-xs-12">
-       <div class="form-group">
-         <label for="name">Name</label>
-         <input type="text" id="name" class="form-control" formControlName="name">
-       </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" formControlName="name">
+        </div>
       </div>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!editMode">
       <div class="col-xs-12">
         <div class="form-group">
           <label for="daysLeft">days</label>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!editMode">
       <div class="col-xs-12">
         <div class="form-group">
           <label for="hoursLeft">hours</label>
@@ -58,7 +58,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <button type="submit" class="btn btn-success" [disabled]="!projectForm.valid" >save</button>
+        <button type="submit" class="btn btn-success" [disabled]="!projectForm.valid">save</button>
         <button type="button" class="btn btn-danger" (click)="onCancel()">cancel</button>
       </div>
     </div>

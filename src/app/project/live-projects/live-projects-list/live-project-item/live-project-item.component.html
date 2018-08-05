@@ -1,44 +1,14 @@
-<!--<a-->
-  <!--style="cursor: pointer;"-->
-  <!--[routerLink]="[index]"-->
-  <!--routerLinkActive="active"-->
-  <!--&gt;-->
-  <!--<div class="card">-->
-    <!--<div class="card-content">-->
-      <!--<a >-->
-        <!--<h4 class="card-title">-->
-          <!--{{ proj.name }}-->
-        <!--</h4>-->
-      <!--</a>-->
-      <!--<ul class="list-group list-group-flush text-center">-->
-        <!--<li class="list-group-item">-->
-      <!--<p class="list-group-item-text">{{ proj.GetRecruitmentPercent() }}% {{proj.moneyCollected}}</p>-->
-        <!--</li>-->
-        <!--<span class="pull-right">-->
-          <!--<img [src]="proj.imagePath" alt="{{ proj.name }}" class="img-responsive img">-->
-        <!--</span>-->
-      <!--</ul>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</a>-->
-
-
-  <a
-    style="cursor: pointer; align-content: center"
-    [routerLink]="[index]"
-    routerLinkActive="active"
-    class="list-group-item ">
-    <!--<span class="col-">
-    <div class="pull-left">-->
-      <h4 class="list-group-item-heading">{{ proj.name }}</h4>
-      <p class="list-group-item-text">{{ proj.GetRecruitmentPercent() }}% {{proj.moneyCollected}}</p>
-      <p class="list-group-item-text">No. of donation: {{proj.donations.length}}</p>
-    <!--</div
-    </span>
-    <span class="pull-right">-->
-      <a href="">
-          <img [src]="proj.imagePath" alt="{{ proj.name }}" class="img-responsive img">
-        </a>
-        <!--</span>-->
+<a
+  style="cursor: pointer; align-content: center; height: 100%"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item ">
+  <h4 class="list-group-item-heading">{{ proj.name }}</h4>
+  <p class="list-group-item-text">{{ proj.GetRecruitmentPercent() }}% {{proj.moneyCollected}}</p>
+  <p class="list-group-item-text">No. of donation: {{proj.donations.length}}</p>
+  <h4>{{days}}:{{hours}}:{{minutes}}:{{seconds}}</h4>
+  <a href="">
+    <img [src]="proj.imagePath" alt="{{ proj.name }}" class="img-responsive img">
   </a>
+</a>
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import {Subscription} from 'rxjs/Subscription';
 import {Donate} from "../../donate.model";
 import {projectService} from "../../../shared/project.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -15,8 +15,10 @@ import {ServerService} from "../../../shared/server.service";
 export class DonateProjectComponent implements OnInit {
   donateForm: FormGroup;
   id: number;
-  constructor(private route: ActivatedRoute , private projectService: projectService
-    , private router: Router,private userService: userService, private serverService: ServerService) { }
+
+  constructor(private route: ActivatedRoute, private projectService: projectService
+    , private router: Router, private userService: userService, private serverService: ServerService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -36,12 +38,12 @@ export class DonateProjectComponent implements OnInit {
     })
   }
 
-  onCancel(){
-    this.router.navigate(['../'],{relativeTo: this.route});
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
-  onDonate(){
-    this.projectService.addDonation(new Donate(this.donateForm.value['name'],this.donateForm.value['amount']),this.id);
+  onDonate() {
+    this.projectService.addDonation(new Donate(this.donateForm.value['name'], +this.donateForm.value['amount']), this.id);
     this.serverService.updatePoject(this.projectService.getProjectById(this.id));
     this.onCancel();
   }

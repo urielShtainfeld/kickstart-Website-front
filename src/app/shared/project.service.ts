@@ -52,7 +52,6 @@ export class projectService{
 
   addDonation(donation: Donate,id: number){
     this.liveProjects[id].addDonation(donation);
-    this.liveProjects[id].moneyCollected += donation.amount;
     this.projectsChanged.next(this.liveProjects.slice());
   }
 

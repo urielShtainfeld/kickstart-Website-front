@@ -1,10 +1,11 @@
 <button class="btn btn-success" (click)="onNewProject()" *ngIf="canCreate">new project</button>
 <hr>
-<div class="col-sm-3">
-  <app-live-project-item class=""
-     *ngFor="let proj of liveProjects;let i = index"
-     [proj]="proj"
-     [index]="i"
-     style="cursor:pointer;"></app-live-project-item>
+<div class="row col-sm-12">
+  <app-live-project-item
+    class="col-sm-3"
+    *ngFor="let proj of liveProjects;let i = index"
+    [proj]="proj"
+    [index]="i"
+    style="cursor:pointer;height: auto">
+  </app-live-project-item>
 </div>
-

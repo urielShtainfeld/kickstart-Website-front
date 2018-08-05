@@ -1,9 +1,9 @@
-<form [formGroup]="donateForm" (ngSubmit) = "onDonate()">
+<form [formGroup]="donateForm" (ngSubmit)="onDonate()">
   <div class="row">
     <div class="col-xs-12">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" class="form-control" formControlName="name" >
+        <input type="text" id="name" class="form-control" formControlName="name">
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <br>
-  <button class="btn btn-success" type="submit" [disabled]="!userForm.valid" >Donate</button>
+  <button class="btn btn-success" type="submit" [disabled]="!donateForm.valid">Donate</button>
   <button type="button" class="btn btn-danger" (click)="onCancel()">cancel</button>
 </form>
 

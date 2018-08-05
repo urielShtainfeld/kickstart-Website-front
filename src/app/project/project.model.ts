@@ -14,13 +14,19 @@ export class Project {
   public status: string;
   public owner: string;
   public donations: Donate[] = [];
+  public endDate: Date;
 
   constructor(uniqueId: string,name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,
-              linkToExample: string,owner: string,donations: Donate[], moneyCollected: number ){
+              linkToExample: string,owner: string,donations: Donate[], moneyCollected: number ,endDate: Date){
   if (uniqueId != undefined){
     this.uniqueId = uniqueId;
   } else {
     this.uniqueId = Guid.create().toString();
+  }
+  if (endDate != undefined){
+    this.endDate = endDate;
+  }else{
+    this.endDate = new Date( new Date().getTime() + (1000 * 60 * 60 * (24*daysLeft)) + (1000 * 60 * 60 *hoursLeft));
   }
   this.name = name;
   this.description = description;
@@ -35,7 +41,7 @@ export class Project {
   this.donations = donations;
   }
   GetRecruitmentPercent(){
-    return this.moneyCollected/this.neededMoney*100;
+    return Math.round(this.moneyCollected/this.neededMoney*100);
   }
   addDonation(donation: Donate){
     this.moneyCollected += donation.amount;
