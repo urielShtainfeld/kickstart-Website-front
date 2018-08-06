@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Project} from "../project/project.model";
 import {Donate} from "../project/donate.model";
 import {Subject} from "rxjs/Subject";
+import index from "@angular/cli/lib/cli";
 
 
 @Injectable()
@@ -70,6 +71,12 @@ export class projectService{
     this.liveProjects.splice(index,1);
     this.projectsChanged.next(this.liveProjects.slice());
     this.archiveProjectsChanged.next(this.archiveProjects.slice());
+  }
+
+  deleteDonation(projectIndex: number,donationIndex: number){
+    this.liveProjects[projectIndex].moneyCollected -= this.liveProjects[projectIndex].donations[donationIndex].amount;
+    this.liveProjects[projectIndex].donations.splice(donationIndex,1);
+    this.projectsChanged.next(this.liveProjects.slice());
   }
 
 }

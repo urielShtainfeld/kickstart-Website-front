@@ -3,6 +3,7 @@ import {Project} from "../../project.model";
 import {projectService} from "../../../shared/project.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {userService} from "../../../shared/user.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-live-projects-list',
@@ -12,7 +13,7 @@ import {userService} from "../../../shared/user.service";
 export class LiveProjectsListComponent implements OnInit {
   liveProjects: Project[] = [];
   canCreate: boolean = false;
-
+  searchWord: string ='';
   constructor(private projectService: projectService, private router: Router , private route: ActivatedRoute, private userService: userService){}
 
   ngOnInit() {
@@ -33,5 +34,9 @@ export class LiveProjectsListComponent implements OnInit {
 
   onNewProject(){
     this.router.navigate(['new'], {relativeTo: this.route});
+  }
+  onSubmit(form: NgForm) {
+    console.log(form.value.search);
+    this.searchWord = form.value.search
   }
 }

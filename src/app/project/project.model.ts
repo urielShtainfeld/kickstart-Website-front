@@ -15,9 +15,10 @@ export class Project {
   public owner: string;
   public donations: Donate[] = [];
   public endDate: Date;
+  public videoPath: string;
 
   constructor(uniqueId: string,name: string,description: string,imagePath: string,daysLeft: number,hoursLeft: number,neededMoney: number,
-              linkToExample: string,owner: string,donations: Donate[], moneyCollected: number ,endDate: Date){
+              linkToExample: string,owner: string,donations: Donate[], moneyCollected: number ,endDate: Date ,videoPath: string){
   if (uniqueId != undefined){
     this.uniqueId = uniqueId;
   } else {
@@ -39,14 +40,18 @@ export class Project {
   this.status = 'live';
   this.owner = owner;
   this.donations = donations;
+  this.videoPath = videoPath;
   }
+
   GetRecruitmentPercent(){
     return Math.round(this.moneyCollected/this.neededMoney*100);
   }
+
   addDonation(donation: Donate){
     this.moneyCollected += donation.amount;
     this.donations.push(donation);
   }
+
   checkIfKickedOut(){
     if(this.GetRecruitmentPercent() >= 100 ){
       this.status = 'kickedout';

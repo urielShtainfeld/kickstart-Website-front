@@ -11,8 +11,6 @@ const backEndUrl = 'http://localhost:3000/';
 
 @Injectable()
 export class ServerService {
-  private result:string;
-  private secondInterval$ = interval(1000);
   public loadingFinished: boolean =false;
   constructor(private http: Http,private projectService: projectService,private userService: userService){}
 
@@ -40,7 +38,8 @@ export class ServerService {
           const projects =[];
           response.json().forEach((proj) => {
             projects.push(proj)
-          })
+          });
+
           let newliveProjects = [];
           let newArvhiceProjects = [];
           let newKickedoutProjects = [];
@@ -49,6 +48,7 @@ export class ServerService {
             project.donations.forEach((donation) =>{
               newDonations.push(new Donate(donation.name,+donation.amount))
             });
+            let moneyCollected = Number.parseFloat(project.moneyCollected);
 
             switch (project.status.toUpperCase()) {
               case 'LIVE':{
@@ -62,8 +62,9 @@ export class ServerService {
                     project.linkToExample,
                     project.owner,
                     newDonations,
-                    project.moneyCollected,
-                    new Date(project.endDate));
+                    moneyCollected,
+                    new Date(project.endDate),
+                    project.videoPath);
                   if (proj.checkIfKickedOut()){
                     newKickedoutProjects.push(proj);
                   }else {
@@ -82,8 +83,9 @@ export class ServerService {
                     project.linkToExample,
                     project.owner,
                     newDonations,
-                    project.moneyCollected,
-                    new Date(project.endDate)));
+                    moneyCollected,
+                    new Date(project.endDate),
+                    project.videoPath));
                 break;
               }
               case 'KICKEDOUT':{
@@ -97,8 +99,9 @@ export class ServerService {
                     project.linkToExample,
                     project.owner,
                     newDonations,
-                    project.moneyCollected,
-                    new Date(project.endDate)));
+                    moneyCollected,
+                    new Date(project.endDate),
+                    project.videoPath));
                 break;
               }
               case 'ARCHIVE':{
@@ -112,8 +115,9 @@ export class ServerService {
                     project.linkToExample,
                     project.owner,
                     newDonations,
-                    project.moneyCollected,
-                    new Date(project.endDate)));
+                    moneyCollected,
+                    new Date(project.endDate),
+                    project.videoPath));
                 break;
               }
 
@@ -123,6 +127,7 @@ export class ServerService {
           this.projectService.setProjects(newliveProjects);
           this.projectService.setKickedoutProjects(newKickedoutProjects);
           this.projectService.setArchiveProjects(newArvhiceProjects);
+          this.loadingFinished = true;
         }
       );
   }

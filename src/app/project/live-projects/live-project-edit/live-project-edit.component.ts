@@ -60,7 +60,8 @@ export class LiveProjectEditComponent implements OnInit {
       owner,
       donations,
       moneyCollected,
-      endDate);
+      endDate,
+      this.projectForm.value['videoPath']);
     if (this.editMode) {
       this.projectService.updateProject(this.id, newProject);
       this.serverService.updatePoject(newProject);
@@ -80,7 +81,7 @@ export class LiveProjectEditComponent implements OnInit {
     let hoursLeft = '';
     let neededMoney = '';
     let linkToExample = '';
-
+    let videoPath = '';
     if (this.editMode) {
       const project = this.projectService.getProjectById(this.id);
       name = project.name;
@@ -99,12 +100,14 @@ export class LiveProjectEditComponent implements OnInit {
       'daysLeft': new FormControl(daysLeft),
       'hoursLeft': new FormControl(hoursLeft, Validators.required),
       'neededMoney': new FormControl(neededMoney, Validators.required),
-      'linkToExample': new FormControl(linkToExample)
+      'linkToExample': new FormControl(linkToExample),
+      'videoPath': new FormControl(videoPath)
     })
   }
 
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
+
   }
 }
 

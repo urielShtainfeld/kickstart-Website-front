@@ -8,4 +8,12 @@
 .colored-blue{
   border: 2px solid blue;
 }
-
+*{
+  color: black;
+}
+.bg{
+  height: 100vh;
+  width: 100vw;
+  background: url(https://www.freepptbackgrounds.net/wp-content/uploads/2013/01/Light-Blue-Effect-PPT-Backgrounds.jpg);
+  background-size: cover;
+}

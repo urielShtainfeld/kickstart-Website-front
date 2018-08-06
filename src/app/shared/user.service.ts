@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {User} from "../auth/user.model";
 import {Subject} from "rxjs/Subject";
-import {Project} from "../project/project.model";
 import {LocalStorageService} from "./local-storage.service";
 
 @Injectable()

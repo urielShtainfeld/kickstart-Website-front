@@ -1,14 +1,23 @@
 <a
-  style="cursor: pointer; align-content: center; height: 100%"
+  style="cursor: pointer; align-content: center; height: 100%; padding-top: 10px"
   [routerLink]="[index]"
   routerLinkActive="active"
-  class="list-group-item ">
+  class="list-group-item list-group-item-info">
   <h4 class="list-group-item-heading">{{ proj.name }}</h4>
-  <p class="list-group-item-text">{{ proj.GetRecruitmentPercent() }}% {{proj.moneyCollected}}</p>
-  <p class="list-group-item-text">No. of donation: {{proj.donations.length}}</p>
   <h4>{{days}}:{{hours}}:{{minutes}}:{{seconds}}</h4>
   <a href="">
     <img [src]="proj.imagePath" alt="{{ proj.name }}" class="img-responsive img">
   </a>
+  <p class="list-group-item-text">No. of donations: {{proj.donations.length}}</p>
+  <p class="list-group-item-text">Money collected {{proj.moneyCollected}}</p>
+  <div class="progress" style="height: 25px;">
+    <div [ngClass]="{'progress-bar-danger': proj.GetRecruitmentPercent() <33, 'progress-bar-warning': proj.GetRecruitmentPercent()>=33
+          && proj.GetRecruitmentPercent()<66, 'progress-bar-success': proj.GetRecruitmentPercent()>=66}"
+         class="progress-bar progress-bar-striped active" role="progressbar"
+         [attr.aria-valuenow]="proj.GetRecruitmentPercent()" aria-valuemin="0" aria-valuemax="100"
+         style="font-size:12px;" [style.width.%]="proj.GetRecruitmentPercent()">
+     {{proj.GetRecruitmentPercent()}}%
+    </div>
+  </div>
 </a>
 

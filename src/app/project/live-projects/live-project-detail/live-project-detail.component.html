@@ -1,21 +1,25 @@
 <a class="container">
   <div class="row">
-    <div class="column">
-        <div class="col-sm-4">
+    <div class="column col-sm-6">
           <h1>{{proj.name}}</h1>
           <p>{{proj.description}}</p>
-          <p>Link to example: {{proj.linkToExample}}</p>
+          <a target="_blank" rel="noopener noreferrer" [href]="proj.linkToExample">Link to example: {{proj.linkToExample}}</a>
           <p>Ending date: {{endDateString}}</p>
           <p>Goal: {{proj.neededMoney}}</p>
           <p>Collected: {{proj.moneyCollected}}</p>
-          <p>owner: {{proj.owner}}</p>
-        </div>
+          <a target="_blank" rel="noopener noreferrer" [href]="proj.videoPath">Link to video: {{proj.videoPath}}</a>
+          <p>Created by: {{proj.owner}}</p>
+
     </div>
-    <div class="column">
-      <img [src]="proj.imagePath" alt="{{ proj.name }}" class="img-responsive img col-sm-4">
-    </div>
-    <div class="column">
-        <p class="col-sm-4" style="text-align: left" *ngFor="let donation of proj.donations;let i = index "> {{i+1}}. {{donation.name }} : {{donation.amount}}</p>
+    <div class="column col-sm-6" *ngIf="donationExist">
+        <h3 style="text-align: center">Donations:</h3>
+        <div class="list-group-item" style="text-align: left; height: 35px" *ngFor="let donation of proj.donations;let i = index ">
+          <div class="row pull-left" style="text-align: left">
+               {{i+1}}. {{donation.name }} : {{donation.amount}}
+          </div>
+          <button class="pull-right glyphicon glyphicon-trash" *ngIf="canEdit" (click)="onDeleteDonation(i)">
+          </button>
+         </div>
     </div>
   </div>
   <div class="row">
@@ -31,10 +35,6 @@
           <li><a style="cursor:pointer;" (click)="onDelete()">archive</a></li>
         </ul>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
       <button style="cursor:pointer;" class="btn btn-success" (click)="onDonate()" *ngIf="isUser">Donate</button>
     </div>
   </div>

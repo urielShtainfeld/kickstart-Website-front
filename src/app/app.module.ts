@@ -28,6 +28,8 @@ import {KickedoutProjectsComponent} from "./project/kickedout-projects/kickedout
 import {ArchiveProjectItemComponent} from "./project/archive-projects/archive-project-list/archive-project-item/archive-project-item.component";
 import {KickedoutProjectDetailComponent} from "./project/kickedout-projects/kickedout-project-detail/kickedout-project-detail.component";
 import {ArchiveProjectDetailComponent} from "./project/archive-projects/archive-project-detail/archive-project-detail.component";
+import {SearchPipe} from "./shared/search.pipe";
+
 
 
 
@@ -52,7 +54,8 @@ import {ArchiveProjectDetailComponent} from "./project/archive-projects/archive-
     KickedoutProjectsComponent,
     ArchiveProjectItemComponent,
     KickedoutProjectDetailComponent,
-    ArchiveProjectDetailComponent
+    ArchiveProjectDetailComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

@@ -1,56 +1,22 @@
 <div class="row">
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-sm-6">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" class="form-control" formControlName="name">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
           <label for="description">description</label>
           <input type="text" id="description" class="form-control" formControlName="description">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
-          <label for="imagePath">imagePath</label>
+          <label for="imagePath">image Path</label>
           <input type="text" id="imagePath" class="form-control" formControlName="imagePath" #imagePath>
-        </div>
-      </div>
-    </div>
-    <div class="row" *ngIf="!editMode">
-      <div class="col-xs-12">
-        <div class="form-group">
+          <label for="videoPath">video Path</label>
+          <input type="text" id="videoPath" class="form-control" formControlName="videoPath" #videoPath>
           <label for="daysLeft">days</label>
-          <input type="text" id="daysLeft" class="form-control" formControlName="daysLeft">
-        </div>
-      </div>
-    </div>
-    <div class="row" *ngIf="!editMode">
-      <div class="col-xs-12">
-        <div class="form-group">
-          <label for="hoursLeft">hours</label>
-          <input type="text" id="hoursLeft" class="form-control" formControlName="hoursLeft">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
+          <input type="text" id="daysLeft" class="form-control" formControlName="daysLeft" *ngIf="!editMode">
+          <label for="hoursLeft" *ngIf="!editMode" >hours</label>
+          <input type="text" id="hoursLeft" class="form-control" formControlName="hoursLeft" *ngIf="!editMode">
           <label for="neededMoney">needed Money</label>
           <input type="text" id="neededMoney" class="form-control" formControlName="neededMoney">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
           <label for="linkToExample">link To Example</label>
           <input type="text" id="linkToExample" class="form-control" formControlName="linkToExample">
         </div>
@@ -61,6 +27,7 @@
         <button type="submit" class="btn btn-success" [disabled]="!projectForm.valid">save</button>
         <button type="button" class="btn btn-danger" (click)="onCancel()">cancel</button>
       </div>
+
     </div>
   </form>
 </div>

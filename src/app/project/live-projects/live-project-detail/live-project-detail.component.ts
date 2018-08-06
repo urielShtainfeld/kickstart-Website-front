@@ -11,14 +11,16 @@ import * as moment from 'moment';
   templateUrl: './live-project-detail.component.html',
   styleUrls: ['./live-project-detail.component.css']
 })
+
 export class LiveProjectDetailComponent implements OnInit {
   proj: Project;
   id: number;
   canEdit: boolean = false;
   isUser: boolean = false;
   endDateString: string;
-
-
+  donationExist: boolean = false;
+  showVideo: boolean = false;
+  progressColor: string;
   constructor(private projectsService: projectService, private route: ActivatedRoute, private router: Router
     , private userService: userService, private serverService: ServerService) {
   }
@@ -28,6 +30,10 @@ export class LiveProjectDetailComponent implements OnInit {
       (params: Params) => {
         this.id = +params['id'];
         this.proj = this.projectsService.getProjectById(this.id);
+        if (this.proj.donations != undefined){
+          this.donationExist = true;
+        }
+        this.showVideo = !!this.proj.videoPath;
         this.endDateString = moment(this.proj.endDate).format('DD/MM/YYYY HH:MM');
         if (this.userService.userAutenticated) {
           if (this.userService.getUserType().toUpperCase() === 'ADMIN' ||
@@ -59,5 +65,9 @@ export class LiveProjectDetailComponent implements OnInit {
     this.projectsService.archiveProject(this.id);
     this.serverService.updatePoject(this.projectsService.getArchiveProjects()[this.projectsService.getArchiveProjects().length - 1]);
     this.router.navigate(['/live']);
+  }
+  onDeleteDonation(donateIndex: number){
+    this.projectsService.deleteDonation(this.id,donateIndex);
+    this.serverService.updatePoject(this.projectsService.getProjectById(this.id));
   }
 }

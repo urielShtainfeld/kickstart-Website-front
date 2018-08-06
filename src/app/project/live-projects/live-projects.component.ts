@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {projectService} from "../../shared/project.service";
 
 
 @Component({
@@ -10,6 +12,5 @@ export class LiveProjectsComponent {
 
 
   constructor() { }
-
 
 }
