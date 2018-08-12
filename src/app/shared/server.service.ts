@@ -1,14 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http , Headers , RequestOptions} from "@angular/http";
 import {projectService} from "./project.service";
 import {userService} from "./user.service";
 import {User} from "../auth/user.model";
 import {Project} from "../project/project.model";
 import {Donate} from "../project/donate.model";
 import { environment } from '../../environments/environment';
-
-
-
+import * as CryptoJS from 'crypto-js';
 @Injectable()
 export class ServerService {
 
@@ -132,15 +130,27 @@ export class ServerService {
         }
       );
   }
-  async storeUser(user: User){
-    this.http.post(environment.backEndUrl+'user',user)
+  storeUser(user: User){
+
+    let encryptedPass = CryptoJS.AES.encrypt(user.password,environment.secretKey);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('password', encryptedPass);
+    const options = new RequestOptions({headers: headers});
+    console.log(encryptedPass);
+    this.http.post(environment.backEndUrl+'user',{username: user.username, usertype:user.usertype},options)
       .subscribe(
         (response: any) => {
           console.log(response);
         });
   }
   signInUser(username: string,password: string){
-    this.http.post(environment.backEndUrl+'signIn',new User(username,password,''))
+    let encryptedPass = CryptoJS.AES.encrypt(password,environment.secretKey);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('password', encryptedPass);
+    const options = new RequestOptions({headers: headers});
+    this.http.post(environment.backEndUrl+'signIn',{username: username},options)
       .subscribe(
         (response: any) => {
           console.log('user sign in successfully');
@@ -151,7 +161,7 @@ export class ServerService {
           this.userService.setUser(new User(username,password,usertype));
           return usertype;
         },(error:any) => {
-          console.log(error.json());
+          console.log(error);
           throw error;
         });
   }
