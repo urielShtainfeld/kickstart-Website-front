@@ -5,17 +5,18 @@ import {userService} from "./user.service";
 import {User} from "../auth/user.model";
 import {Project} from "../project/project.model";
 import {Donate} from "../project/donate.model";
-import { interval } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const backEndUrl = 'http://localhost:3000/';
+
 
 @Injectable()
 export class ServerService {
+
   public loadingFinished: boolean =false;
   constructor(private http: Http,private projectService: projectService,private userService: userService){}
 
   updatePoject(project: Project){
-    this.http.post(backEndUrl+'updateproject',project)
+    this.http.post(environment.backEndUrl+'updateproject',project)
       .subscribe(
         (response: any) => {
           console.log(response);
@@ -24,7 +25,7 @@ export class ServerService {
   }
 
   storeOneProject(project: Project){
-      this.http.post(backEndUrl+'project',project)
+      this.http.post(environment.backEndUrl+'project',project)
         .subscribe(
           (response: any) => {
             console.log(response);
@@ -32,7 +33,7 @@ export class ServerService {
         );
   }
   getProjects(){
-    this.http.get(backEndUrl+'project')
+    this.http.get(environment.backEndUrl+'project')
       .subscribe(
         (response: any) => {
           const projects =[];
@@ -132,14 +133,14 @@ export class ServerService {
       );
   }
   async storeUser(user: User){
-    this.http.post(backEndUrl+'user',user)
+    this.http.post(environment.backEndUrl+'user',user)
       .subscribe(
         (response: any) => {
           console.log(response);
         });
   }
   signInUser(username: string,password: string){
-    this.http.post(backEndUrl+'signIn',new User(username,password,''))
+    this.http.post(environment.backEndUrl+'signIn',new User(username,password,''))
       .subscribe(
         (response: any) => {
           console.log('user sign in successfully');

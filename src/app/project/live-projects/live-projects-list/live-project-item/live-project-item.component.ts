@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Project} from "../../../project.model";
-import { timer } from 'rxjs';
-import { take, map } from 'rxjs/operators';
-import {Subject} from "rxjs/Subject";
 import { interval } from 'rxjs';
 
 
@@ -15,7 +12,6 @@ export class LiveProjectItemComponent implements OnInit {
   @Input() proj: Project;
   @Input() index: number;
   count: number;
-  timeChange: Subject<number>;
   private refreshInterval$ = interval(1000);
   days: number;
   hours: number;
@@ -33,7 +29,7 @@ export class LiveProjectItemComponent implements OnInit {
     this.hours = Math.floor(this.minutes/60);
     this.days = Math.floor(this.hours/24);
 
-    this.hours%= 24;
+    this.hours %= 24;
     this.minutes %= 60;
     this.seconds %=60;
 
